@@ -13,7 +13,7 @@ use Drupal\Core\Link;
  */
 class DefaultEntityListBuilder extends EntityListBuilder
 {
-    /**
+  /**
    * {@inheritdoc}
    */
   public function buildHeader() {
@@ -36,4 +36,22 @@ class DefaultEntityListBuilder extends EntityListBuilder
     );
     return $row + parent::buildRow($entity);
   }
+
+    /**
+     * Filter entities with current language.
+     *
+     * {@inheritdoc}
+     */
+    protected function getEntityIds() {
+        $langCode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+        $query = $this->getStorage()->getQuery()
+            ->sort($this->entityType->getKey('id'))
+            ->condition('langcode', $langCode, '=');
+
+        // Only add the pager if a limit is specified.
+        if ($this->limit) {
+            $query->pager($this->limit);
+        }
+        return $query->execute();
+    }
 }
