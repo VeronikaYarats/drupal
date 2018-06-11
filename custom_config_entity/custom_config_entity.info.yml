@@ -1,0 +1,5 @@
+name: 'Custom configurable entity'
+type: module
+description: 'Creating custom configurable entity'
+package: 'Drupal 8 mentoring'
+core: 8.x
