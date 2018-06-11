@@ -8,5 +8,11 @@ custom_config_entity.default_entity.*:
     label:
       type: label
       label: 'Label'
+    title:
+      type: string
+      label: 'Title'
+    description:
+      type: string
+      label: 'Description'
     uuid:
       type: string
