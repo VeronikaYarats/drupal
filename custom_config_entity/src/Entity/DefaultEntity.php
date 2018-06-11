@@ -44,17 +44,30 @@ use Drupal\Core\Entity\EntityTypeInterface;
  */
 class DefaultEntity extends ConfigEntityBase implements DefaultEntityInterface {
 
-  /**
-   * The Default entity ID.
-   *
-   * @var string
-   */
-  protected $id;
+    /**
+     * The Default entity ID.
+     *
+     * @var string
+     */
+    protected $id;
 
-  /**
-   * The Default entity label.
-   *
-   * @var string
-   */
-  protected $label;
+    /**
+     * The Default entity label.
+     *
+     * @var string
+     */
+    protected $label;
+    /**
+     * The Default entity title.
+     *
+     * @var string
+     */
+    public $title;
+
+    /**
+     * The Default entity description.
+     *
+     * @var string
+     */
+    public $description;
 }

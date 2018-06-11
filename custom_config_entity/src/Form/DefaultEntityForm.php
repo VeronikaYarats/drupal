@@ -14,30 +14,46 @@ class DefaultEntityForm extends EntityForm {
    * {@inheritdoc}
    */
   public function form(array $form, FormStateInterface $form_state) {
-    $form = parent::form($form, $form_state);
+      $form = parent::form($form, $form_state);
 
-    $default_entity = $this->entity;
-    $form['label'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Label'),
-      '#maxlength' => 255,
-      '#default_value' => $default_entity->label(),
-      '#description' => $this->t("Label for the Default entity."),
-      '#required' => TRUE,
-    ];
+      $default_entity = $this->entity;
+      $form['label'] = [
+          '#type' => 'textfield',
+          '#title' => $this->t('Label'),
+          '#maxlength' => 255,
+          '#default_value' => $default_entity->label(),
+          '#description' => $this->t("Label for the Default entity."),
+          '#required' => TRUE,
+      ];
 
-    $form['id'] = [
-      '#type' => 'machine_name',
-      '#default_value' => $default_entity->id(),
-      '#machine_name' => [
-        'exists' => '\Drupal\custom_config_entity\Entity\DefaultEntity::load',
-      ],
-      '#disabled' => !$default_entity->isNew(),
-    ];
-    
-    /* You will need additional form elements for your custom properties. */
+      $form['id'] = [
+          '#type' => 'machine_name',
+          '#default_value' => $default_entity->id(),
+          '#machine_name' => [
+              'exists' => '\Drupal\custom_config_entity\Entity\DefaultEntity::load',
+          ],
+          '#disabled' => !$default_entity->isNew(),
+      ];
 
-    return $form;
+      $form['title'] = [
+          '#type' => 'textfield',
+          '#title' => $this->t('Title'),
+          '#maxlength' => 255,
+          '#default_value' => $default_entity->title,
+          '#description' => $this->t("Title for the Default entity."),
+          '#required' => TRUE,
+      ];
+
+      $form['description'] = [
+          '#type' => 'textarea',
+          '#title' => $this->t('Description'),
+          '#maxlength' => 255,
+          '#default_value' => $default_entity->description,
+          '#description' => $this->t("Description for the Default entity."),
+          '#required' => FALSE,
+      ];
+
+      return $form;
   }
 
   /**
