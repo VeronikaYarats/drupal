@@ -9,6 +9,7 @@ use Drupal\Core\Entity\RevisionableInterface;
 use Drupal\Core\Entity\EntityChangedTrait;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\user\UserInterface;
+use Drupal\Core\Field\FieldStorageDefinitionInterface;
 
 /**
  * Defines the Default entity entity.
@@ -49,19 +50,19 @@ use Drupal\user\UserInterface;
  *     "uuid" = "uuid",
  *     "uid" = "user_id",
  *     "langcode" = "langcode",
- *     "status" = "status",
+ *     "status" = "status"
  *   },
  *   links = {
- *     "canonical" = "/admin/structure/default_entity/{default_entity}",
- *     "add-form" = "/admin/structure/default_entity/add",
- *     "edit-form" = "/admin/structure/default_entity/{default_entity}/edit",
- *     "delete-form" = "/admin/structure/default_entity/{default_entity}/delete",
- *     "version-history" = "/admin/structure/default_entity/{default_entity}/revisions",
- *     "revision" = "/admin/structure/default_entity/{default_entity}/revisions/{default_entity_revision}/view",
- *     "revision_revert" = "/admin/structure/default_entity/{default_entity}/revisions/{default_entity_revision}/revert",
- *     "revision_delete" = "/admin/structure/default_entity/{default_entity}/revisions/{default_entity_revision}/delete",
- *     "translation_revert" = "/admin/structure/default_entity/{default_entity}/revisions/{default_entity_revision}/revert/{langcode}",
- *     "collection" = "/admin/structure/default_entity",
+ *     "canonical" = "/admin/structure/custom_entities/default_entity/{default_entity}",
+ *     "add-form" = "/admin/structure/custom_entities/default_entity/add",
+ *     "edit-form" = "/admin/structure/custom_entities/default_entity/{default_entity}/edit",
+ *     "delete-form" = "/admin/structure/custom_entities/default_entity/{default_entity}/delete",
+ *     "version-history" = "/admin/structure/custom_entities/default_entity/{default_entity}/revisions",
+ *     "revision" = "/admin/structure/custom_entities/default_entity/{default_entity}/revisions/{default_entity_revision}/view",
+ *     "revision_revert" = "/admin/structure/custom_entities/default_entity/{default_entity}/revisions/{default_entity_revision}/revert",
+ *     "revision_delete" = "/admin/structure/custom_entities/default_entity/{default_entity}/revisions/{default_entity_revision}/delete",
+ *     "translation_revert" = "/admin/structure/custom_entities/default_entity/{default_entity}/revisions/{default_entity_revision}/revert/{langcode}",
+ *     "collection" = "/admin/structure/custom_entities/default_entity",
  *   },
  *   field_ui_base_route = "default_entity.settings"
  * )
@@ -161,6 +162,13 @@ class DefaultEntity extends RevisionableContentEntityBase implements DefaultEnti
   public function getOwnerId() {
     return $this->get('user_id')->target_id;
   }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDescription() {
+      return $this->get('description')->value;
+    }
 
   /**
    * {@inheritdoc}
@@ -275,9 +283,34 @@ class DefaultEntity extends RevisionableContentEntityBase implements DefaultEnti
         ->setLabel('Description')
         ->setDescription('Describes smth')
         ->setRevisionable(TRUE)
-        ->setTranslatable(TRUE);
+        ->setTranslatable(TRUE)
+        ->setDefaultValue('')
+        ->setDisplayOptions('view', [
+            'label' => 'above',
+            'type' => 'string',
+            'weight' => -4,
+        ])
+        ->setDisplayOptions('form', [
+            'type' => 'string_textfield',
+            'weight' => -4,
+        ])
+        ->setDisplayConfigurable('form', TRUE)
+        ->setDisplayConfigurable('view', TRUE)
+        ->setRequired(TRUE);
 
-    return $fields;
+  $fields['article_reference'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Article'))
+      ->setDescription(t('Refers to article'))
+      ->setRevisionable(TRUE)
+      ->setTranslatable(TRUE)
+      ->setCardinality(FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED)
+      ->setSetting('target_type', 'node')
+      ->setDefaultValue('')
+      ->setDisplayOptions('form', [
+          'type' => 'dynamic_entity_reference_default',
+          'weight' => 0,
+      ]);
+      return $fields;
   }
 
 }

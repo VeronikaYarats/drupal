@@ -36,6 +36,13 @@ interface DefaultEntityInterface extends ContentEntityInterface, RevisionLogInte
   public function setName($name);
 
   /**
+   * Get the Default entity description/
+   *
+   * @return string
+   */
+  public function getDescription();
+
+  /**
    * Gets the Default entity creation timestamp.
    *
    * @return int
