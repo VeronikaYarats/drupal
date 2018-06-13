@@ -1,0 +1,7 @@
+article-color:
+  version: 1.x
+  js:
+    js/color.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
