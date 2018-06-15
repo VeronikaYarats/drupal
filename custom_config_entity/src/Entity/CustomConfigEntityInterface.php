@@ -5,9 +5,9 @@ namespace Drupal\custom_config_entity\Entity;
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
 
 /**
- * Provides an interface for defining Default entity entities.
+ * Provides an interface for defining Custom config entity entities.
  */
-interface DefaultEntityInterface extends ConfigEntityInterface {
+interface CustomConfigEntityInterface extends ConfigEntityInterface {
 
   // Add get/set methods for your configuration properties here.
 

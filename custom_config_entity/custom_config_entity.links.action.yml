@@ -1,6 +1,6 @@
-entity.default_entity.add_form:
-  route_name: entity.default_entity.add_form
-  title: 'Add Default entity'
+entity.custom_config_entity.add_form:
+  route_name: entity.custom_config_entity.add_form
+  title: 'Add Custom config entity'
   appears_on:
-    - entity.default_entity.collection
+    - entity.custom_config_entity.collection
 
