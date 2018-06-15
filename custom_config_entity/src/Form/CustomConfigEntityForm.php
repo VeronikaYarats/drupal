@@ -39,7 +39,7 @@ class CustomConfigEntityForm extends EntityForm {
           '#type' => 'textfield',
           '#title' => $this->t('Title'),
           '#maxlength' => 255,
-          '#default_value' => $custom_config_entity->title,
+          '#default_value' => $custom_config_entity->getTitle(),
           '#description' => $this->t("Title for the Custom config entity."),
           '#required' => TRUE,
       ];
@@ -48,7 +48,7 @@ class CustomConfigEntityForm extends EntityForm {
           '#type' => 'textarea',
           '#title' => $this->t('Description'),
           '#maxlength' => 255,
-          '#default_value' => $custom_config_entity->description,
+          '#default_value' => $custom_config_entity->getDescription(),
           '#description' => $this->t("Description for the Custom config entity."),
           '#required' => FALSE,
       ];

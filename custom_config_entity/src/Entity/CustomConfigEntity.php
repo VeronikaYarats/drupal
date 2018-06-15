@@ -62,12 +62,28 @@ class CustomConfigEntity extends ConfigEntityBase implements CustomConfigEntityI
      *
      * @var string
      */
-    public $title;
+    protected $title;
 
     /**
      * The Custom config entity description.
      *
      * @var string
      */
-    public $description;
+    protected $description;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
 }
