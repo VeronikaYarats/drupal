@@ -1,0 +1,5 @@
+name: 'Custom entity'
+type: module
+description: 'Creating custom entity'
+package: 'Drupal 8 mentoring'
+core: 8.x
