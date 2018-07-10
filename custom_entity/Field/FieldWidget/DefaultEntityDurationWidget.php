@@ -156,7 +156,7 @@ class DefaultEntityDurationWidget extends WidgetBase
   public function validateDuration(array $element, FormStateInterface $formState, $form)
   {
     $dates = $this->getElementsByNames(['start_date', 'end_date'], $form);
-    if (!$this->isValidDuration(strtotime($dates['start_date']['#value']), strtotime($dates['end_date']['#value'])))
+    if (strtotime($dates['start_date']['#value']) > strtotime($dates['end_date']['#value']))
       $formState->setError($dates['end_date'],
         $this->t(self::INVALID_DURATION_ERROR_MESSAGE));
     }
@@ -198,17 +198,5 @@ class DefaultEntityDurationWidget extends WidgetBase
   {
     if (!empty($element['#value']) && !strtotime($element['#value']))
       $formState->setError($element, self::INVALID_DATE_FORMAT_ERROR_MESSAGE);
-  }
-
-  /**
-   * Validate that end date goes after start date.
-   *
-   * @param $start_date
-   * @param $end_date
-   * @return bool
-   */
-  private function isValidDuration($start_date, $end_date)
-  {
-    return $end_date > $start_date || $end_date == $start_date;
   }
 }
