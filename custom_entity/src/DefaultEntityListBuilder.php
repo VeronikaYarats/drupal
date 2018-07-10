@@ -17,32 +17,32 @@ use Drupal\Core\Language\LanguageManagerInterface;
  */
 class DefaultEntityListBuilder extends EntityListBuilder
 {
-    /**
-     * @var LanguageManagerInterface
-     */
-    private $languageManager;
+  /**
+   * @var LanguageManagerInterface
+   */
+  private $languageManager;
 
-    /**
-     * @param EntityTypeInterface $entity_type
-     * @param EntityStorageInterface $storage
-     * @param LanguageManagerInterface $date_formatter
-     */
-    public function __construct(EntityTypeInterface $entity_type, EntityStorageInterface $storage, LanguageManagerInterface $languageManager) {
-        parent::__construct($entity_type, $storage);
+  /**
+   * @param EntityTypeInterface $entity_type
+   * @param EntityStorageInterface $storage
+   * @param LanguageManagerInterface $date_formatter
+   */
+  public function __construct(EntityTypeInterface $entity_type, EntityStorageInterface $storage, LanguageManagerInterface $languageManager) {
+    parent::__construct($entity_type, $storage);
 
-        $this->languageManager = $languageManager;
-    }
+    $this->languageManager = $languageManager;
+  }
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function createInstance(ContainerInterface $container, EntityTypeInterface $entity_type) {
-        return new static(
-            $entity_type,
-            $container->get('entity.manager')->getStorage($entity_type->id()),
-            $container->get('language_manager')
-        );
-    }
+  /**
+   * {@inheritdoc}
+   */
+  public static function createInstance(ContainerInterface $container, EntityTypeInterface $entity_type) {
+    return new static(
+      $entity_type,
+      $container->get('entity.manager')->getStorage($entity_type->id()),
+      $container->get('language_manager')
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -75,15 +75,15 @@ class DefaultEntityListBuilder extends EntityListBuilder
      * {@inheritdoc}
      */
     protected function getEntityIds() {
-        $langCode = $this->languageManager->getCurrentLanguage()->getId();
-        $query = $this->getStorage()->getQuery()
-            ->sort($this->entityType->getKey('id'))
-            ->condition('langcode', $langCode, '=');
+      $langCode = $this->languageManager->getCurrentLanguage()->getId();
+      $query = $this->getStorage()->getQuery()
+        ->sort($this->entityType->getKey('id'))
+        ->condition('langcode', $langCode, '=');
 
-        // Only add the pager if a limit is specified.
-        if ($this->limit) {
-            $query->pager($this->limit);
-        }
-        return $query->execute();
+      // Only add the pager if a limit is specified.
+      if ($this->limit) {
+        $query->pager($this->limit);
+      }
+      return $query->execute();
     }
 }
