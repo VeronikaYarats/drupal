@@ -1,0 +1,7 @@
+field.widget.settings.default_entity_duration_w:
+  type: mapping
+  label: 'Default Entity Duration - widget settings'
+  mapping:
+    date_format:
+      type: string
+      label: 'Date format'
