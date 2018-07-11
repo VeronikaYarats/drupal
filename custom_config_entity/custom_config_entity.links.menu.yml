@@ -1,9 +1,14 @@
 
-# Default entity menu items definition
-entity.default_entity.collection:
-  title: 'Default entity'
-  route_name: entity.default_entity.collection
-  description: 'List Default entity (bundles)'
+# Custom config entity menu items definition
+entity.my_custom_entities:
+  title: 'My custom entities'
+  route_name: custom_config_entity.custom_entities
+  description: 'Here a links for my custom entities'
   parent: system.admin_structure
-  weight: 99
 
+entity.custom_config_entity.collection:
+  title: 'Custom config entity'
+  route_name: entity.custom_config_entity.collection
+  description: 'List Custom config entity (bundles)'
+  parent: entity.my_custom_entities
+  weight: 99

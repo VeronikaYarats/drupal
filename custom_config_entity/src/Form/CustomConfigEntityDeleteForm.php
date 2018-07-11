@@ -7,9 +7,9 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 
 /**
- * Builds the form to delete Default entity entities.
+ * Builds the form to delete Custom config entity entities.
  */
-class DefaultEntityDeleteForm extends EntityConfirmFormBase {
+class CustomConfigEntityDeleteForm extends EntityConfirmFormBase {
 
   /**
    * {@inheritdoc}
@@ -22,7 +22,7 @@ class DefaultEntityDeleteForm extends EntityConfirmFormBase {
    * {@inheritdoc}
    */
   public function getCancelUrl() {
-    return new Url('entity.default_entity.collection');
+    return new Url('entity.custom_config_entity.collection');
   }
 
   /**
